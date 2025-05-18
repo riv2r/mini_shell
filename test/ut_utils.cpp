@@ -17,8 +17,8 @@ void UTUtils_CmpStr_Expect(char strArr[][MAX_CMD_LEN])
 
 TEST(UTUtils, UTUtils_CmpStr)
 {
-    char strArr[][MAX_CMD_LEN] = {"cd", "exit", "echo", "pwd"};
-    int sz = sizeof(strArr) / sizeof(strArr[0]);
+    char strArr[][MAX_CMD_LEN] = {"cd", "exit", "pwd", "echo"};
+    UINT8 sz = sizeof(strArr) / sizeof(strArr[0]);
     qsort(strArr, sz, MAX_CMD_LEN, CmpStr);
     UTUtils_CmpStr_Expect(strArr);
 }

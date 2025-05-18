@@ -3,7 +3,7 @@
 #include <sys/wait.h>
 #include <stdio.h>
 
-void ExecuteCommand(commandStru *cmd)
+void ExecuteCommand(const commandStru *cmd)
 {
     pid_t pid = fork();
     if (pid < 0)

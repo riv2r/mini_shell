@@ -1,14 +1,13 @@
 #ifndef BUILTIN_H
 #define BUILTIN_H
 
+#include "init.h"
 #include "parser.h"
-#include <stdbool.h>
 
-const char builtinCommand[][MAX_CMD_LEN] = {
-    "cd",
-    "exit"};
+extern char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN];
+extern UINT8 builtinCommandNum;
 
-bool IsBuiltinCommand(const commandStru *cmd);
-UINT8 ExecuteBuiltinCommand(const commandStru *cmd);
+RET IsBuiltinCommand(const char command[MAX_CMD_LEN]);
+RET ExecuteBuiltinCommand(const commandStru *cmd);
 
 #endif

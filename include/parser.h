@@ -15,6 +15,6 @@ typedef struct
     char *argv[MAX_ARGS_NUM];
 } commandStru;
 
-UINT8 ParserCommand(char *line, commandStru *cmd);
+RET ParserCommand(char *line, commandStru *cmd);
 
 #endif
