@@ -7,6 +7,7 @@
 #include <string.h>
 
 #define MAX_ARGS_NUM 256
+#define MAX_CMD_LEN 16
 
 typedef struct
 {
