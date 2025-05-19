@@ -40,10 +40,7 @@ int main(int argc, char const *argv[])
         {
             if (IsBuiltinCommand(cmd->argv[0]))
             {
-                if (strcmp(cmd->argv[0], "exit") == 0)
-                {
-                    break;
-                }
+                ExecuteBuiltinCommand(cmd);
             }
             else
             {
