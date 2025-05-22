@@ -28,7 +28,8 @@ set(HEADERS
     include/utils.h
     include/parser.h
     include/builtin.h
-    include/executor.h)
+    include/executor.h
+    include/uthash.h)
 
 set(TEST
     test/ut_utils.cpp)

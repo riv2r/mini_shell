@@ -3,21 +3,23 @@
 
 #include "init.h"
 #include "parser.h"
-
-extern char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN];
-extern UINT8 builtinCommandNum;
+#include "uthash.h"
 
 typedef void (*builtinCommandHandler)(const commandStru *cmd);
 typedef struct
 {
-    const char arg[MAX_CMD_LEN];
+    char arg[MAX_CMD_LEN];
     builtinCommandHandler handler;
+    UT_hash_handle hh;
 } builtinCommandMap;
 
-extern builtinCommandMap builtinCmdMap[MAX_ARGS_NUM];
+extern char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN];
+extern UINT8 builtinCommandNum;
+extern builtinCommandMap *builtinCmdMap;
 
-RET IsBuiltinCommand(const char command[MAX_CMD_LEN]);
-RET ExecuteBuiltinCommand(const commandStru *cmd);
+RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler);
+builtinCommandMap *IsBuiltinCommand(const commandStru *cmd);
+void ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd);
 
 void ExitHandler(const commandStru *cmd);
 

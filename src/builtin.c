@@ -9,25 +9,27 @@ char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN] = {
 
 UINT8 builtinCommandNum = 4;
 
-builtinCommandMap builtinCmdMap[MAX_ARGS_NUM] = {
-    {"exit", ExitHandler}};
+builtinCommandMap *builtinCmdMap = NULL;
 
-RET IsBuiltinCommand(const char command[MAX_CMD_LEN])
+RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler)
 {
-    char *ret = bsearch(command, builtinCommand, builtinCommandNum, MAX_CMD_LEN, CmpStr);
-    return ret != NULL ? RET_OK : RET_ERROR;
+    builtinCommandMap *temp = malloc(sizeof(builtinCommandMap));
+    strncpy(temp->arg, arg, MAX_CMD_LEN);
+    temp->handler = handler;
+    HASH_ADD_KEYPTR(hh, builtinCmdMap, temp->arg, strlen(temp->arg), temp);
+    return temp != NULL ? RET_OK : RET_ERROR;
 }
 
-RET ExecuteBuiltinCommand(const commandStru *cmd)
+builtinCommandMap *IsBuiltinCommand(const commandStru *cmd)
 {
-    for (UINT8 i = 0; i < builtinCommandNum; ++i)
-    {
-        if (strcmp(builtinCmdMap[i].arg, cmd->argv[0]) == 0)
-        {
-            builtinCmdMap[i].handler(cmd);
-        }
-    }
-    return RET_OK;
+    builtinCommandMap *temp = NULL;
+    HASH_FIND_STR(builtinCmdMap, cmd->argv[0], temp);
+    return temp;
+}
+
+void ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd)
+{
+    item->handler(cmd);
 }
 
 void ExitHandler(const commandStru *cmd)

@@ -11,6 +11,6 @@ typedef unsigned char UINT8;
 typedef unsigned short UINT16;
 
 RET init();
-RET GetSortedBuiltinCommand();
+RET RegBuiltinCommand();
 
 #endif

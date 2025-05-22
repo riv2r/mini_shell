@@ -38,9 +38,11 @@ int main(int argc, char const *argv[])
         commandStru *cmd = (commandStru *)malloc(sizeof(commandStru));
         if (ParserCommand(line, cmd) && cmd->length)
         {
-            if (IsBuiltinCommand(cmd->argv[0]))
+            builtinCommandMap *temp = IsBuiltinCommand(cmd);
+            if (temp)
             {
-                ExecuteBuiltinCommand(cmd);
+                ExecuteBuiltinCommand(temp, cmd);
+                free(temp);
             }
             else
             {
