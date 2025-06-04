@@ -42,7 +42,6 @@ int main(int argc, char const *argv[])
             if (temp)
             {
                 ExecuteBuiltinCommand(temp, cmd);
-                free(temp);
             }
             else
             {

@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "uthash.h"
 
-typedef void (*builtinCommandHandler)(const commandStru *cmd);
+typedef RET (*builtinCommandHandler)(const commandStru *cmd);
 typedef struct
 {
     char arg[MAX_CMD_LEN];
@@ -19,8 +19,9 @@ extern builtinCommandMap *builtinCmdMap;
 
 RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler);
 builtinCommandMap *IsBuiltinCommand(const commandStru *cmd);
-void ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd);
+RET ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd);
 
-void ExitHandler(const commandStru *cmd);
+RET ExitHandler(const commandStru *cmd);
+RET CdHandler(const commandStru *cmd);
 
 #endif

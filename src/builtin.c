@@ -1,5 +1,8 @@
 #include "builtin.h"
-#include "utils.h"
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN] = {
     "cd",
@@ -14,9 +17,9 @@ builtinCommandMap *builtinCmdMap = NULL;
 RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler)
 {
     builtinCommandMap *temp = malloc(sizeof(builtinCommandMap));
-    strncpy(temp->arg, arg, MAX_CMD_LEN);
+    strncpy(temp->arg, arg, MAX_CMD_LEN - 1);
     temp->handler = handler;
-    HASH_ADD_KEYPTR(hh, builtinCmdMap, temp->arg, strlen(temp->arg), temp);
+    HASH_ADD_STR(builtinCmdMap, arg, temp);
     return temp != NULL ? RET_OK : RET_ERROR;
 }
 
@@ -27,12 +30,25 @@ builtinCommandMap *IsBuiltinCommand(const commandStru *cmd)
     return temp;
 }
 
-void ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd)
+RET ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd)
 {
-    item->handler(cmd);
+    return item->handler(cmd);
 }
 
-void ExitHandler(const commandStru *cmd)
+RET ExitHandler(const commandStru *cmd)
 {
     exit(0);
+    return RET_OK;
+}
+
+RET CdHandler(const commandStru *cmd)
+{
+    const char *path = cmd->argv[1] ? cmd->argv[1] : getenv("HOME");
+    printf("%s\n", path);
+    if (chdir(path) != 0)
+    {
+        perror("cd");
+        return RET_ERROR;
+    }
+    return RET_OK;
 }

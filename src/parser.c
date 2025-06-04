@@ -1,4 +1,6 @@
 #include "parser.h"
+#include <stdio.h>
+#include <string.h>
 
 RET ParserCommand(char *line, commandStru *cmd)
 {

@@ -1,11 +1,11 @@
 #include "init.h"
-#include "utils.h"
 #include "builtin.h"
 
 RET RegBuiltinCommand()
 {
     RET ret = RET_OK;
     ret = addBuiltinCommand("exit", ExitHandler);
+    ret = addBuiltinCommand("cd", CdHandler);
     return ret;
 }
 
