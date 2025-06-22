@@ -17,11 +17,13 @@ extern char builtinCommand[MAX_ARGS_NUM][MAX_CMD_LEN];
 extern UINT8 builtinCommandNum;
 extern builtinCommandMap *builtinCmdMap;
 
-RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler);
+RET addBuiltinCommand(const char *arg, builtinCommandHandler handler);
 builtinCommandMap *IsBuiltinCommand(const commandStru *cmd);
 RET ExecuteBuiltinCommand(builtinCommandMap *item, const commandStru *cmd);
 
 RET ExitHandler(const commandStru *cmd);
 RET CdHandler(const commandStru *cmd);
+RET PwdHandler(const commandStru *cmd);
+RET EchoHandler(const commandStru *cmd);
 
 #endif

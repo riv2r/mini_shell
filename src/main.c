@@ -36,6 +36,8 @@ int main(int argc, char const *argv[])
         }
 
         commandStru *cmd = (commandStru *)malloc(sizeof(commandStru));
+        if (cmd == NULL)
+            perror("malloc failed");
         if (ParserCommand(line, cmd) && cmd->length)
         {
             builtinCommandMap *temp = IsBuiltinCommand(cmd);

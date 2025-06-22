@@ -14,7 +14,7 @@ UINT8 builtinCommandNum = 4;
 
 builtinCommandMap *builtinCmdMap = NULL;
 
-RET addBuiltinCommand(const char arg[MAX_CMD_LEN], builtinCommandHandler handler)
+RET addBuiltinCommand(const char *arg, builtinCommandHandler handler)
 {
     builtinCommandMap *temp = malloc(sizeof(builtinCommandMap));
     strncpy(temp->arg, arg, MAX_CMD_LEN - 1);
@@ -49,6 +49,35 @@ RET CdHandler(const commandStru *cmd)
     {
         perror("cd");
         return RET_ERROR;
+    }
+    return RET_OK;
+}
+
+RET PwdHandler(const commandStru *cmd)
+{
+    char *path = getcwd(NULL, 0);
+    if (path != NULL)
+    {
+        printf("%s\n", path);
+        free(path);
+    }
+    else
+    {
+        perror("pwd");
+        return RET_ERROR;
+    }
+    return RET_OK;
+}
+
+RET EchoHandler(const commandStru *cmd)
+{
+    if (cmd->length > 1)
+    {
+        for (UINT8 i = 1; i < cmd->length; ++i)
+        {
+            printf("%s", cmd->argv[i]);
+            printf(i == cmd->length - 1 ? "\n" : " ");
+        }
     }
     return RET_OK;
 }
