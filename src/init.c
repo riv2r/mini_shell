@@ -8,6 +8,7 @@ RET RegBuiltinCommand()
     ret = addBuiltinCommand("cd", CdHandler);
     ret = addBuiltinCommand("pwd", PwdHandler);
     ret = addBuiltinCommand("echo", EchoHandler);
+    ret = addBuiltinCommand("export", ExportHandler);
     return ret;
 }
 
