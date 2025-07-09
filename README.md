@@ -39,6 +39,10 @@ mini_shell/
 
 ## log
 
+### [2025-07-09]
+#### Changed
+- support parse command with pipe "|" 
+
 ### [2025-07-08]
 #### Changed
 - change struct **commandStru** from single command to linked list for pipe extension

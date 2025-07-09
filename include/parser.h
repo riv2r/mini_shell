@@ -13,6 +13,7 @@ typedef struct commandStru
     struct commandStru *next;
 } commandStru;
 
-RET ParserCommand(char *line, commandStru *cmd);
+RET ParserSingleCommand(char *line, commandStru *cmd);
+RET ParserCommand(char *line, commandStru **cmdHead);
 
 #endif
