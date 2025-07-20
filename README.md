@@ -39,6 +39,10 @@ mini_shell/
 
 ## log
 
+### [2025-07-20]
+#### Changed
+- support execute command with pipe "|" 
+
 ### [2025-07-09]
 #### Changed
 - support parse command with pipe "|" 

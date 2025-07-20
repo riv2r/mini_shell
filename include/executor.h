@@ -3,6 +3,6 @@
 
 #include "parser.h"
 
-void ExecuteCommand(const commandStru *cmd);
+RET ExecuteCommand(commandStru *cmdHead);
 
 #endif
